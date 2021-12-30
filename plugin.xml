@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-needer-kakao" name="cordova-plugin-needer-kakao" version="0.0.1">
+  <name>KakaoCordovaPlugin</name>
+  <description>Kakao Cordova SDK Plugin</description>
+
+  <js-module name="KakaoCordovaSDK" src="www/KakaoCordovaSDK.js">
+    <clobbers target="KakaoCordovaSDK" />
+  </js-module>
+
+	<preference name="KAKAO_APP_KEY" />
+
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="KakaoCordovaSDK">
+        <param name="onload" value="true" />
+        <param name="ios-package" value="KakaoCordovaSDK" />
+      </feature>
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="KAKAO_APP_KEY">
+      <string>$KAKAO_APP_KEY</string>
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+      <array>
+        <dict>
+          <key>CFBundleURLSchemes</key>
+          <array>
+            <string>kakao$KAKAO_APP_KEY</string>
+          </array>
+        </dict>
+      </array>
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+      <array>
+        <string>kakao$KAKAO_APP_KEY</string>
+        <string>kakaokompassauth</string>
+        <string>storykompassauth</string>
+        <string>kakaolink</string>
+        <string>storylink</string>
+        <string>kakaotalk-5.9.7</string>
+      </array>
+    </config-file>
+
+    <framework src="QuartzCore.framework" />
+    <framework src="src/ios/framework/KakaoLink.framework" custom="true" />
+    <framework src="src/ios/framework/KakaoCommon.framework" custom="true" />
+    <framework src="src/ios/framework/KakaoOpenSDK.framework" custom="true" />
+    <framework src="src/ios/framework/KakaoPlusFriend.framework" custom="true" />
+    <framework src="src/ios/framework/KakaoMessageTemplate.framework" custom="true" />
+
+    <source-file src="src/ios/KakaoCordovaSDK.m" />
+    <header-file src="src/ios/KakaoCordovaSDK.h" />
+  </platform>
+</plugin>

@@ -1,0 +1,17 @@
+{
+  "license": "MIT",
+  "version": "0.0.1",
+  "author": "Needer",
+  "id": "cordova-plugin-needer-kakao",
+  "name": "cordova-plugin-needer-kakao",
+  "description": "Kakao Cordova SDK Plugin",
+  "keywords": ["cordova", "kakao", "login", "kakaoaccount", "cordova-ios"],
+  "cordova": {
+    "id": "cordova-plugin-needer-kakao",
+    "platforms": ["ios"]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NeederINC/cordova-plugin-needer-kakao.git"
+  }
+}
