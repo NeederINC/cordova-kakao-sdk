@@ -1,0 +1,14 @@
+repositories {
+  maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
+}
+
+dependencies {
+  // 카카오 로그인
+  implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.30.7'
+
+  // 카카오톡
+  implementation group: 'com.kakao.sdk', name: 'kakaotalk', version: '1.30.7'
+
+  // 카카오링크
+  implementation group: 'com.kakao.sdk', name: 'kakaolink', version: '1.30.7'
+}
