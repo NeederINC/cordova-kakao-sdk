@@ -1,6 +1,6 @@
 {
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Needer",
   "id": "cordova-plugin-needer-kakao",
   "name": "cordova-plugin-needer-kakao",
@@ -8,7 +8,7 @@
   "keywords": ["cordova", "kakao", "login", "kakaoaccount", "cordova-ios"],
   "cordova": {
     "id": "cordova-plugin-needer-kakao",
-    "platforms": ["ios"]
+    "platforms": ["ios", "android"]
   },
   "repository": {
     "type": "git",
