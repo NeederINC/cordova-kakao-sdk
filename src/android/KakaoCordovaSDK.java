@@ -387,10 +387,16 @@ public class KakaoCordovaSDK extends CordovaPlugin {
     @Override
     public void onSuccess(MeV2Response response) {
       try {
-        JSONObject sendResult = new JSONObject(response.toString());
+        JSONObject sendResult = new JSONObject();
+        JSONObject receiveObject = new JSONObject(response.toString());
+        JSONObject me = new JSONObject(receiveObject.getString("kakao_account"));
         String accessToken = Session.getCurrentSession().getTokenInfo().getAccessToken();
 
-        Log.v(LOG_TAG, "kakao response: " + sendResult);
+        sendResult.put("email", me.get("email"));
+        sendResult.put("id", receiveObject.get("id"));
+        sendResult.put("has_email", me.get("has_email"));
+
+        Log.v(LOG_TAG, "kakao response: " + receiveObject);
 
         sendResult.put("accessToken", accessToken);
 
