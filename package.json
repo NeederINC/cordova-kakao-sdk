@@ -1,14 +1,23 @@
 {
   "license": "MIT",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Needer",
   "id": "cordova-plugin-needer-kakao",
   "name": "cordova-plugin-needer-kakao",
   "description": "Kakao Cordova SDK Plugin",
-  "keywords": ["cordova", "kakao", "login", "kakaoaccount", "cordova-ios"],
+  "keywords": [
+    "cordova",
+    "kakao",
+    "login",
+    "kakaoaccount",
+    "cordova-ios"
+  ],
   "cordova": {
     "id": "cordova-plugin-needer-kakao",
-    "platforms": ["ios", "android"]
+    "platforms": [
+      "ios",
+      "android"
+    ]
   },
   "repository": {
     "type": "git",
