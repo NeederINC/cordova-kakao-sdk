@@ -54,7 +54,9 @@ public class KakaoCordovaSDK extends CordovaPlugin {
 
     currentActivity = this.cordova.getActivity();
 
-    KakaoSDK.init(new KakaoSDKAdapter());
+    if (KakaoSDK.getAdapter() == null) {
+      KakaoSDK.init(new KakaoSDKAdapter());
+    }
   }
 
   @Override
