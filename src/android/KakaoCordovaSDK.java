@@ -436,6 +436,7 @@ public class KakaoCordovaSDK extends CordovaPlugin {
     try {
       SocialObject socialObject = null;
       JSONObject object = options.getJSONObject(0);
+      SONObject contentJSONObject = object.getJSONObject("content");
 
       if (object == null) {
         callbackContext.error("feed template is null");
@@ -466,7 +467,21 @@ public class KakaoCordovaSDK extends CordovaPlugin {
 
       addButtonsArray(object, feedTemplateBuilder);
 
-      KakaoLinkService.getInstance().sendDefault(currentActivity, feedTemplateBuilder.build(), new KakaoLinkResponseCallback(callbackContext));
+      Map<String, String> serverCallbackArgs = new HashMap<String, String>();
+      if (contentJSONObject.has("serverCallbackArgs")) {
+        Log.v(LOG_TAG, contentJSONObject.getJSONObject("serverCallbackArgs").toString());
+        JSONObject _serverCallbackArgs = contentJSONObject.getJSONObject("serverCallbackArgs");
+        Iterator i = _serverCallbackArgs.keys();
+
+        while (i.hasNext()) {
+          String key = i.next().toString();
+          serverCallbackArgs.put(key, _serverCallbackArgs.getString(key));
+        }
+
+        Log.v(LOG_TAG, serverCallbackArgs.toString());
+      }
+
+      KakaoLinkService.getInstance().sendDefault(currentActivity, feedTemplateBuilder.build(), serverCallbackArgs, new KakaoLinkResponseCallback(callbackContext));
     } catch (JSONException e) {
       e.printStackTrace();
       callbackContext.error(e.getMessage());
