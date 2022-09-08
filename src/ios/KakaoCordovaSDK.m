@@ -116,8 +116,14 @@
 
 - (void) sendLinkFeed:(CDVInvokedUrlCommand*) command {
   NSMutableDictionary *options = [[command.arguments lastObject] mutableCopy];
+  NSDictionary *content = (NSDictionary *)options[@"content"];
 
   NSLog(@"%@", options);
+
+  NSDictionary *serverCallbackArgs;
+  if(content[@"serverCallbackArgs"] != NULL) {
+      serverCallbackArgs = (NSDictionary *)content[@"serverCallbackArgs"];
+  }
 
   // feed template
   KMTTemplate *template = [KMTFeedTemplate feedTemplateWithBuilderBlock:^(KMTFeedTemplateBuilder * _Nonnull feedTemplateBuilder) {
@@ -145,7 +151,7 @@
   }];
 
   // 카카오링크 실행
-  [self sendDefaultWithTemplate:template params:options[@"params"] command:command];
+  [self sendDefaultWithTemplate:template command:command serverCallbackArgs:serverCallbackArgs];
 }
 
 - (void) getAccessToken:(CDVInvokedUrlCommand*) command {
@@ -330,10 +336,9 @@
   }
 }
 
-- (void) sendDefaultWithTemplate:(KMTTemplate*) template params:(NSDictionary*) params command:(CDVInvokedUrlCommand*) command {
-  [[KLKTalkLinkCenter sharedCenter] sendDefaultWithTemplate:template
-                                    serverCallbackArgs:params
-                                    success:^(NSDictionary<NSString *,NSString *> * _Nullable warningMsg, NSDictionary<NSString *,NSString *> * _Nullable argumentMsg) {
+- (void)sendDefaultWithTemplate:(KMTTemplate*)template command:(CDVInvokedUrlCommand*)command serverCallbackArgs:serverCallbackArgs {
+    [[KLKTalkLinkCenter sharedCenter] sendDefaultWithTemplate:template serverCallbackArgs:serverCallbackArgs  success:^(NSDictionary<NSString *,NSString *> * _Nullable warningMsg, NSDictionary<NSString *,NSString *> * _Nullable argumentMsg) {
+
     // 성공
     NSLog(@"warning message: %@", warningMsg);
     NSLog(@"argument message: %@", argumentMsg);
