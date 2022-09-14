@@ -436,7 +436,7 @@ public class KakaoCordovaSDK extends CordovaPlugin {
     try {
       SocialObject socialObject = null;
       JSONObject object = options.getJSONObject(0);
-      SONObject contentJSONObject = object.getJSONObject("content");
+      JSONObject contentJSONObject = object.getJSONObject("content");
 
       if (object == null) {
         callbackContext.error("feed template is null");
