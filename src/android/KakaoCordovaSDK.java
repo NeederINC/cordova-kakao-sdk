@@ -118,19 +118,23 @@ public class KakaoCordovaSDK extends CordovaPlugin {
 
     try {
       if (object.has("webURL")) {
-        linkObjectBuilder.setWebUrl("webURL");
+        // linkObjectBuilder.setWebUrl("webURL");
+        linkObjectBuilder.setWebUrl(object.getString("webURL"));
       }
 
       if (object.has("mobileWebURL")) {
-        linkObjectBuilder.setMobileWebUrl("mobileWebURL");
+        // linkObjectBuilder.setMobileWebUrl("mobileWebURL");
+        linkObjectBuilder.setMobileWebUrl(object.getString("mobileWebURL"));
       }
 
       if (object.has("androidExecutionParams")) {
-        linkObjectBuilder.setAndroidExecutionParams("androidExecutionParams");
+        // linkObjectBuilder.setAndroidExecutionParams("androidExecutionParams");
+        linkObjectBuilder.setAndroidExecutionParams(object.getString("androidExecutionParams"));
       }
 
       if (object.has("iosExecutionParams")) {
-        linkObjectBuilder.setIosExecutionParams("iosExecutionParams");
+        // linkObjectBuilder.setIosExecutionParams("iosExecutionParams");
+        linkObjectBuilder.setIosExecutionParams(object.getString("iosExecutionParams"));
       }
     } catch (Exception e) {
       return null;
