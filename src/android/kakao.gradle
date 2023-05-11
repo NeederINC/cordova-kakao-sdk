@@ -3,12 +3,6 @@ repositories {
 }
 
 dependencies {
-  // 카카오 로그인
-  implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.30.7'
+  implementation "com.kakao.sdk:v2-all:2.13.0" // 전체 모듈 설치, 2.11.0 버전부터 지원
 
-  // 카카오톡
-  implementation group: 'com.kakao.sdk', name: 'kakaotalk', version: '1.30.7'
-
-  // 카카오링크
-  implementation group: 'com.kakao.sdk', name: 'kakaolink', version: '1.30.7'
 }

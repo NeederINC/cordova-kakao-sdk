@@ -1,18 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-needer-kakao" name="cordova-plugin-needer-kakao" version="1.0.0">
+<?xml version="1.0" encoding="utf-8"?>
+<plugin id="cordova-plugin-needer-kakao" name="cordova-plugin-needer-kakao"  version="2.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>KakaoCordovaPlugin</name>
-  <description>Kakao Cordova SDK Plugin</description>
 
   <js-module name="KakaoCordovaSDK" src="www/KakaoCordovaSDK.js">
     <clobbers target="KakaoCordovaSDK" />
   </js-module>
 
-	<preference name="KAKAO_APP_KEY" />
+  <preference name="KAKAO_APP_KEY" />
+
+  <hook type="after_prepare" src="hooks/postinstall.js" />
+  <hook type="after_plugin_add" src="hooks/postinstall.js" />
+  <hook type="after_platform_add" src="hooks/postinstall.js" />
 
   <platform name="ios">
-    <config-file target="config.xml" parent="/*">
+    <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
+
+    <config-file parent="/*" target="config.xml">
       <feature name="KakaoCordovaSDK">
-        <param name="onload" value="true" />
+        <param name="onload" value="true"/>
         <param name="ios-package" value="KakaoCordovaSDK" />
       </feature>
     </config-file>
@@ -43,15 +48,21 @@
       </array>
     </config-file>
 
-    <framework src="QuartzCore.framework" />
-    <framework src="src/ios/framework/KakaoLink.framework" custom="true" />
-    <framework src="src/ios/framework/KakaoCommon.framework" custom="true" />
-    <framework src="src/ios/framework/KakaoOpenSDK.framework" custom="true" />
-    <framework src="src/ios/framework/KakaoPlusFriend.framework" custom="true" />
-    <framework src="src/ios/framework/KakaoMessageTemplate.framework" custom="true" />
+    <source-file src="src/ios/KakaoCordovaSDK.swift" />
 
-    <source-file src="src/ios/KakaoCordovaSDK.m" />
-    <header-file src="src/ios/KakaoCordovaSDK.h" />
+    <podspec>
+      <config>
+        <source url="https://github.com/CocoaPods/Specs.git" />
+      </config>
+
+      <pods  use-frameworks="true">
+        <pod name="KakaoSDK" spec="2.14.0" />
+        <pod name="Alamofire" spec="5.6.4" />
+      </pods>
+    </podspec>
+
+    <framework src="KakaoSDK" type="podspec" spec="2.14.0"/>
+    <framework src="Alamofire" type="podspec" spec="5.6.4" />
   </platform>
 
   <platform name="android">
@@ -75,16 +86,18 @@
       <meta-data android:name="com.kakao.sdk.AppKey" android:value="$KAKAO_APP_KEY" />
     </config-file>
 
-    <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
-      <intent-filter>
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="kakao$KAKAO_APP_KEY" android:host="oauth" />
-      </intent-filter>
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <activity  android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity" android:exported="true">
+        <intent-filter>
+          <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE" />
+          <data android:scheme="kakao$KAKAO_APP_KEY" android:host="oauth" />
+        </intent-filter>
+      </activity>
     </config-file>
 
     <framework src="src/android/kakao.gradle" custom="true" type="gradleReference" />
-    <source-file src="src/android/KakaoCordovaSDK.java" target-dir="src/com/needer/plugin/kakao" />
+    <source-file src="src/android/KakaoCordovaSDK.kt" target-dir="app/src/main/kotlin/com/needer/plugin/kakao" />
   </platform>
 </plugin>
