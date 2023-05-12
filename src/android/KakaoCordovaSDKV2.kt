@@ -22,7 +22,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 
-class KakaoCordovaSDK : CordovaPlugin() {
+class KakaoCordovaSDKV2 : CordovaPlugin() {
     override fun pluginInitialize() {
         super.pluginInitialize()
         try {
@@ -36,7 +36,7 @@ class KakaoCordovaSDK : CordovaPlugin() {
                 KakaoSdk.init(super.cordova.context, apiKey)
             }
         } catch (var6: Exception) {
-            Log.d("KAKAO_SDK", "Caught non-fatal exception while retrieving apiKey: $var6")
+            Log.d("KAKAO_SDKV2", "Caught non-fatal exception while retrieving apiKey: $var6")
         }
     }
 

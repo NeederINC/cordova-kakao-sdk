@@ -6,7 +6,30 @@ import KakaoSDKTemplate
 import KakaoSDKUser
 import SafariServices
 
-class KakaoCordovaSDK: CDVPlugin {
+// @objc(KakaoAuthV2Utils)
+// class KakaoAuthV2Utils: NSObject {
+//     @objc(initSdk)
+//     class func initSdk() {
+//         let key = Bundle.main.object(forInfoDictionaryKey: "KAKAO_APP_KEY") as? String
+//         if let key = key {
+//             KakaoSDK.initSDK(appKey: key)
+//         }
+//     }
+//     @objc(attach:)
+//     class func attach(_url: NSURL) -> Bool {
+//         if let _url = _url.absoluteString {
+//             if let url = URL(string: _url) {
+//                 if AuthApi.isKakaoTalkLoginUrl(url) {
+//                     return AuthController.handleOpenUrl(url: url)
+//                 }
+//             }
+//         }
+        
+//         return false
+//     }
+// }
+
+class KakaoCordovaSDKV2: CDVPlugin {
     var safariViewController: SFSafariViewController?
     var rootViewController: UIViewController?
     override func pluginInitialize() {
